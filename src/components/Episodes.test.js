@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, getAllByAltText, getAllByTestId, queryAllByTestId } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Episodes from './Episodes'
 
 const episodeData = [
@@ -75,9 +75,9 @@ test("Episodes renders without errors", () => {
 
 test("Render episodes after API call", () => {
     // render component with an empty array
-    const { rerender, debug, getByText, getAllByTestId, queryAllByTestId } = render(<Episodes episodes={[]} />)
+    const { rerender, getAllByTestId, queryAllByTestId } = render(<Episodes episodes={[]} />)
 
-    // Testing that no missions are returned before API call
+    // Testing that no episodes are returned before API call
     expect(queryAllByTestId(/episode/i)).toHaveLength(0)
 
     // re-render component with episode data
@@ -85,42 +85,6 @@ test("Render episodes after API call", () => {
 
     // test to make sure all missions are rendering
     const episodes = getAllByTestId(/episode/i)
-    // console.log(missions)
     expect(episodes).toHaveLength(3)
 
 })
-/**
-
-
-test("MissionsList renders without errors", () => {
-    render(<MissionsList missions={[]} />)
-})
-
-test("Render list of missions after API call", () => {
-    // render component with an empty array for the missions props
-    const { rerender, debug, getByText, getAllByTestId, queryAllByTestId } = render(<MissionsList missions={[]} />)
-    // debug() //shows that is rendered in the DOM
-
-    // Testing that no missions are returned before API call
-    expect(queryAllByTestId(/missions/i)).toHaveLength(0)
-
-    // re-render component with missions data (simulating user experiance of clicking the "Get Data" button)
-    rerender(<MissionsList missions={missionData} />)
-    // debug()
-
-    // //test individually
-    // // query for the missions being rendered
-    // const thaicom = getByText(/thaicom/i)
-    // const telstar = getByText(/telstar/i)
-
-    // // assert that they are listed on the DOM
-    // expect(thaicom).toBeInTheDocument()
-    // expect(telstar).toBeInTheDocument()
-
-    // test to make sure all missions are rendering
-    const missions = getAllByTestId(/missions/i)
-        // console.log(missions)
-    expect(missions).toHaveLength(3)
-
-})
- */
